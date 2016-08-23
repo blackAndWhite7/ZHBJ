@@ -8,4 +8,32 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <!-- <RadioButton
+            android:id="@+id/rb_home"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="首页"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:button="@null"
+            android:drawableTop="@drawable/home"
+            android:padding="5dp"/>-->
+
+    <style name="Bottom_Tab_Style">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:gravity">center</item>
+        <!--取消掉RadioButton的小圆圈-->
+        <item name="android:button">@null</item>
+        <!--图片和文字间的间隔-->
+        <item name="android:drawablePadding">7dp</item>
+        <!--防止有些手机显示出错误-->
+        <item name="android:background">@android:color/transparent</item>
+        <!--文字点击后会变为红色，所以要用到状态选择器，在res目录下建一个color的文件夹来存放-->
+        <item name="android:textColor">@color/text_tab_selector</item>
+    </style>
+
 </resources>

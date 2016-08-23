@@ -33,15 +33,19 @@ public class MainActivity extends SlidingFragmentActivity {
         slidingMenu.setMode(SlidingMenu.LEFT_RIGHT);*/
         slidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);//设置全屏触摸
         slidingMenu.setBehindOffset(800);//屏幕预留800像素宽度
-
+        //初始化fragment
         initFragment();
     }
 
     public void initFragment() {
         FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction beginTransaction = fragmentManager.beginTransaction();
+        FragmentTransaction beginTransaction = fragmentManager.beginTransaction();//开始事务
+        // 用fragment替换侧边栏和主界面的帧布局，就是填充帧布局;
+        // 参1:帧布局容器的id;参2:是要替换的fragment;参3:标记，方便以后找到Fragment
         beginTransaction.replace(R.id.fl_leftmenu,new LeftMenuFragment(),TAG_LEFTMENU);
         beginTransaction.replace(R.id.fl_content,new ContentFragment(),TAG_CONTENT);
-        beginTransaction.commit();
+        beginTransaction.commit();//提交事务
+        //根据标记找到对应的fragment
+        // Fragment LeftMenuFragment = fragmentManager.findFragmentByTag(TAG_LEFTMENU);
     }
 }

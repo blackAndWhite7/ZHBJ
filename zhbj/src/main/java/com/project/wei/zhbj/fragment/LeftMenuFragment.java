@@ -10,10 +10,9 @@ import com.project.wei.zhbj.R;
 public class LeftMenuFragment extends BaseFragment {
     @Override
     public View initView() {
-        View view = View.inflate(getActivity(), R.layout.fragment_leftmenu, null);
+        View view = View.inflate(mActivity, R.layout.fragment_leftmenu, null);
         return view;
     }
-
     @Override
     public void initData() {
 

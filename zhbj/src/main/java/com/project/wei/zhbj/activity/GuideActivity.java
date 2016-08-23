@@ -138,15 +138,16 @@ public class GuideActivity extends Activity {
     }
 
     class GuideAdapter extends PagerAdapter{
-
+        // item的个数
         @Override
         public int getCount() {
             return mImageViewList.size();
         }
-
+        // 初始化item布局
         @Override
         public Object instantiateItem(ViewGroup container, int position) {
             ImageView imageView = mImageViewList.get(position);
+            //一定要添加到容器中,否则不会显示return回去的页面
             container.addView(imageView);
             return imageView;
         }
@@ -155,7 +156,7 @@ public class GuideActivity extends Activity {
         public boolean isViewFromObject(View view, Object object) {
             return view == object;
         }
-
+        // 销毁item
         @Override
         public void destroyItem(ViewGroup container, int position, Object object) {
             container.removeView((View) object);
