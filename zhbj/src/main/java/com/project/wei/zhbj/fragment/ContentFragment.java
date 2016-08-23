@@ -25,8 +25,9 @@ import java.util.ArrayList;
 public class ContentFragment extends BaseFragment {
 
     private NoScrollViewPager vp_content;
-    private ArrayList<BasePager> mPagers;
     private RadioGroup rg_content;
+
+    private ArrayList<BasePager> mPagers;// 五个标签页的集合
 
     @Override
     public View initView() {
@@ -149,6 +150,12 @@ public class ContentFragment extends BaseFragment {
         public void destroyItem(ViewGroup container, int position, Object object) {
             container.removeView((View) object);
         }
+    }
+
+    // 获取新闻中心页面
+    public NewsCenterPager getNewsCenterPager() {
+        NewsCenterPager pager = (NewsCenterPager) mPagers.get(1);
+        return pager;
     }
 
 }
