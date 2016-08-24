@@ -44,7 +44,8 @@ public class LeftMenuFragment extends BaseFragment {
 
     // 给侧边栏设置数据
     public void setMenuData(ArrayList<NewsMenu.NewsMenuData> data){
-        mCurrentPos = 0;//当前选中的位置归零
+        mCurrentPos = 0;//当前选中的位置归零，每次点击新闻中心后，先解析数据，然后把数据通过setMenuData传送过来，
+                        // 在这里就可以把菜单栏menu设置为选中新闻，即mCurrentPos=0
         // 更新页面
         mNewsMenuData = data;
         adapter = new LeftMenuAdapter();
@@ -54,11 +55,10 @@ public class LeftMenuFragment extends BaseFragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 mCurrentPos = position;// 更新当前被选中的位置
-                adapter.notifyDataSetChanged();//刷新listview
-                // 收起侧边栏
-                toggle();
-                // 侧边栏点击之后, 要修改新闻中心的FrameLayout中的内容
-                setCurrentDetailPager(position);
+                adapter.notifyDataSetChanged();//刷新listview,是为了每次点击时可以更新一下menu， 这样才能使点击的menu变为红色，
+                                               //否则，即使你更新了mCurrentPos,也会一直保持第一个menu红色
+                toggle();// 收起侧边栏
+                setCurrentDetailPager(position); // 侧边栏点击之后, 要修改新闻中心的FrameLayout中的内容
             }
         });
     }
@@ -102,11 +102,13 @@ public class LeftMenuFragment extends BaseFragment {
             View view = View.inflate( mActivity, R.layout.item_leftmenu, null);
             TextView tv_menu = (TextView) view.findViewById(R.id.tv_menu);
 
-            NewsMenu.NewsMenuData newsMenuData = mNewsMenuData.get(position);
+            NewsMenu.NewsMenuData newsMenuData = getItem(position);
+            //等同于下面这个
+            //NewsMenu.NewsMenuData newsMenuData = mNewsMenuData.get(position);
             tv_menu.setText(newsMenuData.title);
             if (mCurrentPos == position) {
                 // <item android:state_enabled="true" android:color="#F00"/>
-                //在文字的状态选择器中 enabled表示的是 按下，即可用的时候
+                //在文字的状态选择器中 enabled表示的是可用的时候，如果不作处理，每一个menu都是可用的，即都是红色
                 tv_menu.setEnabled(true);// 被选中,文字变为红色
 
             } else {

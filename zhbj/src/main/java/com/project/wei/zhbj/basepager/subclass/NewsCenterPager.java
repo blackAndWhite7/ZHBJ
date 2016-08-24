@@ -1,12 +1,9 @@
 package com.project.wei.zhbj.basepager.subclass;
 
 import android.app.Activity;
-import android.graphics.Color;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.View;
-import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.lidroid.xutils.HttpUtils;
@@ -41,12 +38,13 @@ public class NewsCenterPager extends BasePager{
     }
 
     public void initData(){
+      /* 默认是菜单详情页-新闻，所以不需要这个页面了
         TextView textView = new TextView(mActivity);
         textView.setText("新闻中心");
         textView.setTextSize(50);
         textView.setTextColor(Color.RED);
         textView.setGravity(Gravity.CENTER);
-        fl_content.addView(textView);
+        fl_content.addView(textView);*/
 
         tv_title.setText("新闻中心");//修改页面标题
         ibtn_menu.setVisibility(View.VISIBLE);// 显示菜单按钮
@@ -93,14 +91,16 @@ public class NewsCenterPager extends BasePager{
         mNewsData = gson.fromJson(result, NewsMenu.class);
         Log.i("解析数据：", mNewsData.toString());
         // 获取侧边栏对象
-        MainActivity mainActivity = (MainActivity) this.mActivity;
+        MainActivity mainActivity = (MainActivity) mActivity;
         LeftMenuFragment leftMenuFragment = mainActivity.getLeftMenuFragment();
         //给侧边栏设置数据
         leftMenuFragment.setMenuData(mNewsData.data);
 
         // 初始化4个菜单详情页
         mMenuDetailPagers = new ArrayList<BaseMenuDetailPager>();
-        mMenuDetailPagers.add(new NewsMenuDetailPager(mActivity));
+
+        //初始化NewsMenuDetailPager时，把mNewsData.data.get(0).children在构造函数中传递过去
+        mMenuDetailPagers.add(new NewsMenuDetailPager(mActivity,mNewsData.data.get(0).children));
         mMenuDetailPagers.add(new TopicMenuDetailPager(mActivity));
         mMenuDetailPagers.add(new PhotosMenuDetailPager(mActivity));
         mMenuDetailPagers.add(new InteractMenuDetailPager(mActivity));
@@ -113,14 +113,14 @@ public class NewsCenterPager extends BasePager{
     public void setCurrentDetailPager(int position) {
         // 重新给frameLayout添加内容
         BaseMenuDetailPager pager = mMenuDetailPagers.get(position);// 获取当前应该显示的页面
-        View view = pager.mRootView;// 当前页面的布局
+        View view = pager.mRootView;// 当前页面的布局，返回的是填充当前页面的view,即每个页面中initView返回的view对象
 
-        // 清除之前旧的布局
+         // 清除之前旧的布局，否则会重叠显示
         fl_content.removeAllViews();
 
         fl_content.addView(view);// 给帧布局添加布局
 
-        // 初始化页面数据
+        // 同时初始化页面数据，即调用当前页面的initData方法
         pager.initData();
 
         // 更新标题

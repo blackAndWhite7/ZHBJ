@@ -50,7 +50,7 @@ public class ContentFragment extends BaseFragment {
         vp_content.setAdapter(new ViewPagerAdapter());
 //      设置每个RadioButton选择后的事件处理，跳转到相应的pager
         radioGruopListener();
-
+//      设置在某些页面侧边栏不能滑出来
         pagerChangeListener();
     }
 
@@ -83,7 +83,7 @@ public class ContentFragment extends BaseFragment {
         //同时，第一个页面要禁用侧边栏
         setSlidingMenuEnable(false);
     }
-
+//  设置侧边栏是否能打开
     private void setSlidingMenuEnable(boolean enable) {
         //获取侧边栏对象
         MainActivity mainActivity = (MainActivity) mActivity;

@@ -21,17 +21,18 @@ public class BasePager {
     public ImageButton ibtn_menu;
     public FrameLayout fl_content; // 空的帧布局对象，要在子类中动态添加布局
 
-    public BasePager(Activity activity){
+    public BasePager(Activity activity) {
         mActivity = activity;
         mRootView = initView();// 当前页面的布局对象
     }
-//  初始化布局
-    public View initView(){
+
+    //  初始化布局
+    public View initView() {
         View view = View.inflate(mActivity, R.layout.base_pager, null);
         tv_title = (TextView) view.findViewById(R.id.tv_title);
         ibtn_menu = (ImageButton) view.findViewById(R.id.ibtn_menu);
         fl_content = (FrameLayout) view.findViewById(R.id.fl_content);
-
+        //      给菜单栏左边的ImageButton，设置点击事件，来控制侧边栏的开关
         ibtn_menu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -41,11 +42,12 @@ public class BasePager {
         return view;
     }
 
-//   初始化数据
-    public void initData(){
+    //   初始化数据
+    public void initData() {
 
     }
-//  打开或者关闭侧边栏
+
+    //  打开或者关闭侧边栏
     private void toggle() {
         MainActivity mainActivity = (MainActivity) mActivity;
         SlidingMenu slidingMenu = mainActivity.getSlidingMenu();
