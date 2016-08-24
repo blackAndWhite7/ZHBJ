@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
+import com.lidroid.xutils.view.annotation.event.OnClick;
 import com.project.wei.zhbj.R;
 import com.project.wei.zhbj.activity.MainActivity;
 import com.project.wei.zhbj.basepager.BaseMenuDetailPager;
@@ -35,7 +36,7 @@ public class NewsMenuDetailPager extends BaseMenuDetailPager {
 
     public NewsMenuDetailPager(Activity activity, ArrayList<NewsMenu.NewsTabData> children) {
         super(activity);
-//		mActivity = activity;  艹 这个东西用父类的就可以了，麻痹，一直报空指针异常
+        //		mActivity = activity;  艹 这个东西用父类的就可以了，麻痹，一直报空指针异常
         mTabData = children;
     }
 
@@ -59,7 +60,7 @@ public class NewsMenuDetailPager extends BaseMenuDetailPager {
         mIndicator.setViewPager(mViewPager);//将viewpager和指示器绑定在一起.注意:必须在viewpager设置完数据之后再绑定
         // 设置页面滑动监听
         // mViewPager.setOnPageChangeListener();
-        // 此处必须给指示器设置页面监听,不能设置给 mViewPager
+        // 此处必须给指示器设置页面监听,不能设置给 mViewPager，因为mIndicator更强势
         pagerChangeListener();
     }
 
@@ -132,6 +133,14 @@ public class NewsMenuDetailPager extends BaseMenuDetailPager {
         public void destroyItem(ViewGroup container, int position, Object object) {
             container.removeView((View) object);
         }
+    }
+
+    @OnClick(R.id.btn_next)
+    public void nextPager(View view) {
+        //跳到下一个页面
+        int currentItem = mViewPager.getCurrentItem();
+        currentItem++;
+        mViewPager.setCurrentItem(currentItem);
     }
 
 }

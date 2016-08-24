@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.lidroid.xutils.HttpUtils;
@@ -79,7 +80,10 @@ public class NewsCenterPager extends BasePager{
 
                     @Override
                     public void onFailure(HttpException e, String s) {
-
+                        // 请求失败
+                        e.printStackTrace();
+                        Toast.makeText(mActivity, s, Toast.LENGTH_SHORT)
+                                .show();
                     }
                 });
     }

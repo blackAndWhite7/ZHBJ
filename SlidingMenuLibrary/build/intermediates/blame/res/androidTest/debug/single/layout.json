@@ -1,0 +1,14 @@
+[
+    {
+        "merged": "H:\\Androidworkspace\\ZHBJ\\library\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\slidingmenumain.xml",
+        "source": "H:\\Androidworkspace\\ZHBJ\\library\\build\\intermediates\\bundles\\debug\\res\\layout\\slidingmenumain.xml"
+    },
+    {
+        "merged": "H:\\Androidworkspace\\ZHBJ\\SlidingMenuLibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\slidingmenumain.xml",
+        "source": "H:\\Androidworkspace\\ZHBJ\\SlidingMenuLibrary\\build\\intermediates\\bundles\\debug\\res\\layout\\slidingmenumain.xml"
+    },
+    {
+        "merged": "H:\\Androidworkspace\\ZHBJ\\librarys\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\slidingmenumain.xml",
+        "source": "H:\\Androidworkspace\\ZHBJ\\librarys\\build\\intermediates\\bundles\\debug\\res\\layout\\slidingmenumain.xml"
+    }
+]

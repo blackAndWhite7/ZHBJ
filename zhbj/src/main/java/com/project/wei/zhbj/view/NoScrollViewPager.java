@@ -26,6 +26,6 @@ public class NoScrollViewPager extends ViewPager {
 //    事件拦截
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
-        return false;//不拦截子控件的事件
+        return false;//不拦截子控件的事件，如果返回true，新闻中心页面将无法滑动
     }
 }

@@ -1,1 +1,3 @@
-include ':zhbj', ':library'
+include ':zhbj', ':SlidingMenuLibrary'
+include ':ViewPagerIndicatorLibrary'
+include ':ViewPagerIndicatorSample'

@@ -20,41 +20,14 @@ public class NewsMenu {
         public String title;
         public int type;
         public ArrayList<NewsTabData> children;
-
-        @Override
-        public String toString() {
-            return "NewsMenuData{" +
-                    "id=" + id +
-                    ", title='" + title + '\'' +
-                    ", type=" + type +
-                    ", children=" + children +
-                    '}';
-        }
     }
-   // 页签的对象
+
+    // 页签的对象
     public class NewsTabData {
         public int id;
         public String title;
         public int type;
         public String url;
-
-       @Override
-       public String toString() {
-           return "NewsTabData{" +
-                   "id=" + id +
-                   ", title='" + title + '\'' +
-                   ", type=" + type +
-                   ", url='" + url + '\'' +
-                   '}';
-       }
-   }
-
-    @Override
-    public String toString() {
-        return "NewsMenu{" +
-                "retcode=" + retcode +
-                ", extend=" + extend +
-                ", data=" + data +
-                '}';
     }
+
 }
