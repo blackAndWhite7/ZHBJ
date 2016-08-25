@@ -4,10 +4,12 @@
               android:layout_height="match_parent"
               android:orientation="vertical">
 
-    <com.project.wei.zhbj.view.TopNewsViewPager
-        android:id="@+id/vp_top_news"
+    <com.project.wei.zhbj.view.PullRefreshListView
+        android:id="@+id/lv_news"
         android:layout_width="match_parent"
-        android:layout_height="200dp">
-    </com.project.wei.zhbj.view.TopNewsViewPager>
+        android:layout_height="match_parent"
+        android:cacheColorHint="#fff">
+    </com.project.wei.zhbj.view.PullRefreshListView>
+    <!--缓冲默认的颜色，防止滑动时可能会变黑-->
 
 </LinearLayout>

@@ -28,7 +28,7 @@ public class SplashActivity extends Activity {
         rv_splash = (RelativeLayout) findViewById(R.id.rv_splash);
         // 旋转动画
         RotateAnimation rotateAnimation = new RotateAnimation(0, 360, Animation.RELATIVE_TO_SELF, 0.5f,
-                Animation.RELATIVE_TO_SELF, 0.5f);
+                Animation.RELATIVE_TO_SELF, 0);
         rotateAnimation.setDuration(1000);// 动画时间
         rotateAnimation.setFillAfter(true);// 保持动画结束状态
         // 缩放动画

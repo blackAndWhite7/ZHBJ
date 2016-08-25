@@ -2,7 +2,6 @@ package com.project.wei.zhbj.basepager.subclass;
 
 import android.app.Activity;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -73,7 +72,6 @@ public class NewsCenterPager extends BasePager{
                         String result = responseInfo.result;
                         //把获取出来的json数据存放起来
                         CacheUtil.setCache(GlobalConstants.CATEGORY_URL,result,mActivity);
-                        Log.i("服务器数据：",result);
                         //解析json数据
                         processData(result);
                     }
@@ -93,7 +91,6 @@ public class NewsCenterPager extends BasePager{
         Gson gson = new Gson();
         //把解析出来的数据存放到了NewsMenu类中
         mNewsData = gson.fromJson(result, NewsMenu.class);
-        Log.i("解析数据：", mNewsData.toString());
         // 获取侧边栏对象
         MainActivity mainActivity = (MainActivity) mActivity;
         LeftMenuFragment leftMenuFragment = mainActivity.getLeftMenuFragment();

@@ -34,7 +34,7 @@ public class MainActivity extends SlidingFragmentActivity {
         // 设置模式,左右都有侧边栏
         slidingMenu.setMode(SlidingMenu.LEFT_RIGHT);*/
         slidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);//设置全屏触摸
-        slidingMenu.setBehindOffset(800);//屏幕预留800像素宽度
+        slidingMenu.setBehindOffset(350);//屏幕预留800像素宽度
         //初始化fragment
         initFragment();
     }
