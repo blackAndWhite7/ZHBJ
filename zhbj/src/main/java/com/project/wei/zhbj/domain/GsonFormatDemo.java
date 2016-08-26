@@ -60,4 +60,5 @@ public class GsonFormatDemo {
 {"id":10105,"title":"汽车","type":1,"url":"/10105/list_1.json"}]},{"id":10002,"title":"专题",
 "type":10,"url":"/10006/list_1.json","url1":"/10007/list1_1.json"},{"id":10003,"title":"组图",
 "type":2,"url":"/10008/list_1.json"},{"id":10004,"title":"互动","type":3,"excurl":"","dayurl":"","weekurl":""}],
-"extend":[10007,10006,10008,10014,10012,10091,10009,10010,10095]}*/
+"extend":[10007,10006,10008,10014,10012,10091,10009,10010,10095]}
+*/

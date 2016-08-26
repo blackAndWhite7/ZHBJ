@@ -6,6 +6,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.RotateAnimation;
+import android.widget.AbsListView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -19,7 +20,7 @@ import java.util.Date;
 /**
  * Created by wei on 2016/8/25 0025.
  */
-public class PullRefreshListView extends ListView {
+public class PullRefreshListView extends ListView implements AbsListView.OnScrollListener {
     public static final int PULL_TO_REFRESH = 1;
     public static final int RELEASE_TO_REFRESH = 2;
     public static final int REFRESHING = 3;
@@ -34,20 +35,25 @@ public class PullRefreshListView extends ListView {
     private ProgressBar pb_loading;
     private RotateAnimation animUP;
     private RotateAnimation animDOWN;
+    private View footerView;
+    private int footerViewHeight;
 
     public PullRefreshListView(Context context) {
         super(context);
         addHeader();
+        addFooter();
     }
 
     public PullRefreshListView(Context context, AttributeSet attrs) {
         super(context, attrs);
         addHeader();
+        addFooter();
     }
 
     public PullRefreshListView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         addHeader();
+        addFooter();
     }
 //  这个方法，一进来就执行，它放在了三个构造函数中
     public void addHeader() {
@@ -68,6 +74,42 @@ public class PullRefreshListView extends ListView {
 
         setCurrentTime();//一进来就更新一下时间，保证是当前时间，其实感觉没什么用
     }
+
+    //添加尾布局
+    public void addFooter() {
+        footerView = View.inflate(getContext(), R.layout.footer_refresh_news,null);
+        addFooterView(footerView);
+        footerView.measure(0,0);
+        footerViewHeight = footerView.getMeasuredHeight();
+        footerView.setPadding(0,-footerViewHeight,0,0);
+        this.setOnScrollListener(this);//滑动监听
+    }
+
+    private boolean isLoadingMore = false;//判断是否正在加载，如果正在加载时，不要重复加载
+    @Override
+    public void onScrollStateChanged(AbsListView view, int scrollState) {
+        if (scrollState == SCROLL_STATE_IDLE) {
+            if (getLastVisiblePosition() == getCount() - 1 && !isLoadingMore) {// 当前显示的是最后一个item并且没有正在加载时
+                footerView.setPadding(0, 0, 0, 0);
+                setSelection(getCount() - 1);// 将listview显示在最后一个item上,
+                                             // 从而加载更多会直接展示出来, 无需手动滑动
+                isLoadingMore = true;
+
+                // 4. 在需要加载的时候，进行回调,就是告诉 TabDetailPager 去完成加载操作
+                if (mListener != null) {
+                    mListener.onLoadMore();
+                }
+
+            }
+        }
+
+    }
+
+    @Override// 滑动的过程中过回调
+    public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+
+    }
+
 
     @Override
     public boolean onTouchEvent(MotionEvent ev) {
@@ -114,7 +156,7 @@ public class PullRefreshListView extends ListView {
                     mCurrentState = REFRESHING;
                     refresh();
 
-                    // 4. 在需要刷新的时候，进行回调
+                    // 4. 在需要刷新的时候，进行回调,就是告诉 TabDetailPager 去完成刷新操作
                     if (mListener != null) {
                         mListener.onRefresh();
                     }
@@ -171,7 +213,8 @@ public class PullRefreshListView extends ListView {
 
     //  1. 设置下拉刷新的回调接口
     public interface OnRefreshListener{
-        public void onRefresh();
+         void onRefresh();
+         void onLoadMore();
     }
 
     //  2. 暴露接口，设置监听
@@ -179,17 +222,26 @@ public class PullRefreshListView extends ListView {
         mListener = listener;
     }
 
+
+
     // 刷新结束，收起头部控件 view ,并回复默认的 PULL_TO_REFRESH 状态
     // 它是在TabDetailPager中，执行刷新操作后去调用的
     public void onRefreshComplete(boolean success){
-        view.setPadding(0,-viewHeight,0,0);
-        mCurrentState = PULL_TO_REFRESH;
-        tv_state.setText("下拉刷新");
-        iv_arrow.setVisibility(View.VISIBLE);
-        pb_loading.setVisibility(View.INVISIBLE);
-        if (success) {
-            setCurrentTime();//只有当刷新成功后才更新一下时间
+        if (!isLoadingMore) {
+            view.setPadding(0, -viewHeight, 0, 0);
+            mCurrentState = PULL_TO_REFRESH;
+            tv_state.setText("下拉刷新");
+            iv_arrow.setVisibility(View.VISIBLE);
+            pb_loading.setVisibility(View.INVISIBLE);
+            if (success) {
+                setCurrentTime();//只有当刷新成功后才更新一下时间
+            }
+        } else {
+            //正在加载更多的时候
+            footerView.setPadding(0,-footerViewHeight,0,0);//隐藏加载更多控件
+            isLoadingMore = false;
         }
+
     }
 
     //  刷新后，更新时间，刷新成功：更新    刷新失败：不更新

@@ -101,6 +101,7 @@ public class NewsMenuDetailPager extends BaseMenuDetailPager {
         }
     }
 
+
     class NewsMenuDetailAdapter extends PagerAdapter {
 
         // 指定指示器的标题
