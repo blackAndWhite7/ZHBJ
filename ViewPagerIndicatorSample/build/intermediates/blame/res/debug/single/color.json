@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "H:\\Androidworkspace\\ZHBJ\\ViewPagerIndicatorSample\\build\\intermediates\\res\\merged\\debug\\color\\vpi__dark_theme.xml",
+        "source": "H:\\Androidworkspace\\ZHBJ\\ViewPagerIndicatorSample\\build\\intermediates\\exploded-aar\\ZHBJ\\ViewPagerIndicatorLibrary\\unspecified\\res\\color\\vpi__dark_theme.xml"
+    },
+    {
+        "merged": "H:\\Androidworkspace\\ZHBJ\\ViewPagerIndicatorSample\\build\\intermediates\\res\\merged\\debug\\color\\vpi__light_theme.xml",
+        "source": "H:\\Androidworkspace\\ZHBJ\\ViewPagerIndicatorSample\\build\\intermediates\\exploded-aar\\ZHBJ\\ViewPagerIndicatorLibrary\\unspecified\\res\\color\\vpi__light_theme.xml"
+    }
+]

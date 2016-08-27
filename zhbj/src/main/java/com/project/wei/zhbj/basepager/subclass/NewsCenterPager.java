@@ -103,7 +103,7 @@ public class NewsCenterPager extends BasePager{
         //初始化NewsMenuDetailPager时，把mNewsData.data.get(0).children在构造函数中传递过去
         mMenuDetailPagers.add(new NewsMenuDetailPager(mActivity,mNewsData.data.get(0).children));
         mMenuDetailPagers.add(new TopicMenuDetailPager(mActivity));
-        mMenuDetailPagers.add(new PhotosMenuDetailPager(mActivity));
+        mMenuDetailPagers.add(new PhotosMenuDetailPager(mActivity,ibtn_change));
         mMenuDetailPagers.add(new InteractMenuDetailPager(mActivity));
 
         // 将新闻菜单详情页设置为默认页面
@@ -126,5 +126,14 @@ public class NewsCenterPager extends BasePager{
 
         // 更新标题
         tv_title.setText(mNewsData.data.get(position).title);
+
+        //如果是组图页面，需要显示切换按钮
+        if (pager instanceof PhotosMenuDetailPager) {
+            ibtn_change.setVisibility(View.VISIBLE);
+        } else {
+            ibtn_change.setVisibility(View.GONE);
+        }
+
+
     }
 }

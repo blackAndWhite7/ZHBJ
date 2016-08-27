@@ -3,9 +3,12 @@ package com.project.wei.zhbj.basepager.subclass.menu;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -61,6 +64,7 @@ public class TabDetailPager extends BaseMenuDetailPager {
     private ListNewsAdapter listNewsAdapter;
     private String mMoreUrl;
     private NewsContent newsContent;
+    private Handler handler;
 
     public TabDetailPager(Activity activity, NewsMenu.NewsTabData newsTabData) {
         super(activity);
@@ -257,6 +261,47 @@ public class TabDetailPager extends BaseMenuDetailPager {
                 listNewsAdapter = new ListNewsAdapter();
                 lv_news.setAdapter(listNewsAdapter);
             }
+
+            // 实现头条新闻的自动轮播
+
+            if (handler == null) {
+                handler = new Handler(){
+                    @Override
+                    public void handleMessage(Message msg) {
+                        int currentItem = mViewPager.getCurrentItem();
+                        currentItem ++;
+                        if (currentItem > topnews.size() - 1) {
+                            currentItem = 0;// 如果已经到了最后一个页面，跳到第一个页面
+                        }
+                        mViewPager.setCurrentItem(currentItem);
+                        handler.sendEmptyMessageDelayed(0,3000);// 继续发送延时3秒的消息,形成内循环
+                    }
+                };
+                // 放在这个位置，保证启动自动轮播逻辑只执行一次
+                handler.sendEmptyMessageDelayed(0,3000); // 发送延时3秒的消息
+
+                // 用户点击正在自动轮播的头条新闻时，暂停自动轮播
+                mViewPager.setOnTouchListener(new View.OnTouchListener() {
+                    @Override
+                    public boolean onTouch(View v, MotionEvent event) {
+                        switch (event.getAction()) {
+                            case MotionEvent.ACTION_DOWN:
+                                // 停止自动轮播，就是删除 handler 的所有消息
+                                handler.removeCallbacksAndMessages(null);//null,表示删除所有类型的
+                                break;
+                            case MotionEvent.ACTION_CANCEL: // 取消事件， 当按下viewpager后,直接滑动listview,
+                                                             // 导致抬起事件无法响应,但会走此事件
+                                handler.sendEmptyMessageDelayed(0,3000); // 重新启动自动轮播
+                                break;
+                            case MotionEvent.ACTION_UP:
+                                handler.sendEmptyMessageDelayed(0,3000); // 重新启动自动轮播
+                                break;
+                        }
+                        return false;// 如果 return true ，就是屏蔽掉viewpager的滑动事件，导致不能手动滑动头条新闻
+                    }
+                });
+            }
+
         } else {
             // 加载更多数据
             ArrayList<NewsContent.NewsData> moreNews = newsContent.data.news;

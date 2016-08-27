@@ -1,0 +1,26 @@
+[
+    {
+        "merged": "H:\\Androidworkspace\\ZHBJ\\ViewPagerIndicatorSample\\build\\intermediates\\res\\merged\\debug\\drawable\\perm_group_calendar.xml",
+        "source": "H:\\Androidworkspace\\ZHBJ\\ViewPagerIndicatorSample\\src\\main\\res\\drawable\\perm_group_calendar.xml"
+    },
+    {
+        "merged": "H:\\Androidworkspace\\ZHBJ\\ViewPagerIndicatorSample\\build\\intermediates\\res\\merged\\debug\\drawable\\perm_group_location.xml",
+        "source": "H:\\Androidworkspace\\ZHBJ\\ViewPagerIndicatorSample\\src\\main\\res\\drawable\\perm_group_location.xml"
+    },
+    {
+        "merged": "H:\\Androidworkspace\\ZHBJ\\ViewPagerIndicatorSample\\build\\intermediates\\res\\merged\\debug\\drawable\\perm_group_device_alarms.xml",
+        "source": "H:\\Androidworkspace\\ZHBJ\\ViewPagerIndicatorSample\\src\\main\\res\\drawable\\perm_group_device_alarms.xml"
+    },
+    {
+        "merged": "H:\\Androidworkspace\\ZHBJ\\ViewPagerIndicatorSample\\build\\intermediates\\res\\merged\\debug\\drawable\\vpi__tab_indicator.xml",
+        "source": "H:\\Androidworkspace\\ZHBJ\\ViewPagerIndicatorSample\\build\\intermediates\\exploded-aar\\ZHBJ\\ViewPagerIndicatorLibrary\\unspecified\\res\\drawable\\vpi__tab_indicator.xml"
+    },
+    {
+        "merged": "H:\\Androidworkspace\\ZHBJ\\ViewPagerIndicatorSample\\build\\intermediates\\res\\merged\\debug\\drawable\\perm_group_camera.xml",
+        "source": "H:\\Androidworkspace\\ZHBJ\\ViewPagerIndicatorSample\\src\\main\\res\\drawable\\perm_group_camera.xml"
+    },
+    {
+        "merged": "H:\\Androidworkspace\\ZHBJ\\ViewPagerIndicatorSample\\build\\intermediates\\res\\merged\\debug\\drawable\\custom_tab_indicator.xml",
+        "source": "H:\\Androidworkspace\\ZHBJ\\ViewPagerIndicatorSample\\src\\main\\res\\drawable\\custom_tab_indicator.xml"
+    }
+]

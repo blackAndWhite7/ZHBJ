@@ -56,4 +56,14 @@
             android:id="@+id/ibtn_share"
             android:background="@null"/>
     </LinearLayout>
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ibtn_change"
+        android:background="@null"
+        android:src="@drawable/icon_pic_grid_type"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="20dp"
+        android:visibility="invisible"/>
 </RelativeLayout>

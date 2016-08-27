@@ -20,6 +20,7 @@ public class BasePager {
     public TextView tv_title;
     public ImageButton ibtn_menu;
     public FrameLayout fl_content; // 空的帧布局对象，要在子类中动态添加布局
+    public ImageButton ibtn_change;
 
     public BasePager(Activity activity) {
         mActivity = activity;
@@ -32,6 +33,7 @@ public class BasePager {
         tv_title = (TextView) view.findViewById(R.id.tv_title);
         ibtn_menu = (ImageButton) view.findViewById(R.id.ibtn_menu);
         fl_content = (FrameLayout) view.findViewById(R.id.fl_content);
+        ibtn_change = (ImageButton) view.findViewById(R.id.ibtn_change);
         //      给菜单栏左边的ImageButton，设置点击事件，来控制侧边栏的开关
         ibtn_menu.setOnClickListener(new View.OnClickListener() {
             @Override

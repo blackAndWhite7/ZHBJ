@@ -21,12 +21,12 @@
 
         </WebView>
         <ProgressBar
-            android:id="@+id/pb_loadinging"
-            android:layout_width="wrap_content"
+            android:id="@+id/pb_loading"
+            style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:visibility="invisible"
-            android:indeterminateDrawable="@drawable/custom_progressbar"
+            android:visibility="visible"
+            android:progressDrawable="@drawable/progressbar_style"
             />
 
     </FrameLayout>
