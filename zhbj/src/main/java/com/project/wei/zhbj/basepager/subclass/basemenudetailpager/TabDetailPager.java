@@ -1,4 +1,4 @@
-package com.project.wei.zhbj.basepager.subclass.menu;
+package com.project.wei.zhbj.basepager.subclass.basemenudetailpager;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -76,7 +76,7 @@ public class TabDetailPager extends BaseMenuDetailPager {
     @Override
     public View initView() {
 /*        view = new TextView(mActivity);
-//        view.setText(mTabData.title);  此处空指针
+//        view.setText(mTabData.title);  此处空指针 super(activity)时会调用initView
         view.setTextColor(Color.RED);
         view.setTextSize(22);
         view.setGravity(Gravity.CENTER);*/

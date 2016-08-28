@@ -63,6 +63,30 @@ public class GuideActivity extends Activity {
 
     }
 
+    private void initData() {
+        mImageViewList = new ArrayList<>();
+        for (int i = 0; i < mImageIds.length; i++) {
+            ImageView imageView = new ImageView(getApplicationContext());
+            imageView.setBackgroundResource(mImageIds[i]);// 通过设置背景,可以让宽高填充布局
+            //            imageView.setImageResource(mImageIds[i]);  这种方式能不能填充布局取决于图片的大小
+            mImageViewList.add(imageView);
+
+            //初始化三个灰色小圆点
+            ImageView grayPoint = new ImageView(getApplicationContext());
+            grayPoint.setImageResource(R.drawable.shape_point_grey);
+            //初始化布局参数, 宽高包裹内容,父控件是谁,就是谁声明的布局参数，给三个小圆点设置间距
+            LinearLayout.LayoutParams params =new LinearLayout.LayoutParams(
+                    ViewGroup.LayoutParams.WRAP_CONTENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT);
+            // 从第二个点开始设置左边距
+            if (i > 0) {
+                params.leftMargin = 30;
+            }
+            grayPoint.setLayoutParams(params);// 设置布局参数
+            ll_container.addView(grayPoint);// 给容器添加圆点
+        }
+    }
+
     private void getDistance() {
         // 计算两个圆点的距离
         // 移动距离=第二个圆点left值 - 第一个圆点left值
@@ -103,7 +127,7 @@ public class GuideActivity extends Activity {
                 if (position == mImageViewList.size() - 1) {
                     btn_guide_welcome.setVisibility(View.VISIBLE);
                 } else {
-                    btn_guide_welcome.setVisibility(View.INVISIBLE);
+                    btn_guide_welcome.setVisibility(View.GONE);
                 }
             }
             @Override
@@ -111,30 +135,6 @@ public class GuideActivity extends Activity {
                 // 页面状态发生变化的回调
             }
         });
-    }
-
-    private void initData() {
-        mImageViewList = new ArrayList<ImageView>();
-        for (int i = 0; i < mImageIds.length; i++) {
-            ImageView imageView = new ImageView(getApplicationContext());
-            imageView.setBackgroundResource(mImageIds[i]);// 通过设置背景,可以让宽高填充布局
-//            imageView.setImageResource(mImageIds[i]);  这种方式能不能填充布局取决于图片的大小
-            mImageViewList.add(imageView);
-
-            //初始化三个灰色小圆点
-            ImageView grayPoint = new ImageView(getApplicationContext());
-            grayPoint.setImageResource(R.drawable.shape_point_grey);
-            //初始化布局参数, 宽高包裹内容,父控件是谁,就是谁声明的布局参数，给三个小圆点设置间距
-            LinearLayout.LayoutParams params =new LinearLayout.LayoutParams(
-                    ViewGroup.LayoutParams.WRAP_CONTENT,
-                    ViewGroup.LayoutParams.WRAP_CONTENT);
-            // 从第二个点开始设置左边距
-            if (i > 0) {
-                params.leftMargin = 30;
-            }
-            grayPoint.setLayoutParams(params);// 设置布局参数
-            ll_container.addView(grayPoint);// 给容器添加圆点
-        }
     }
 
     class GuideAdapter extends PagerAdapter{

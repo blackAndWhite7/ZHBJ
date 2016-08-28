@@ -10,11 +10,11 @@ import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 import com.project.wei.zhbj.R;
 import com.project.wei.zhbj.activity.MainActivity;
 import com.project.wei.zhbj.basepager.BasePager;
-import com.project.wei.zhbj.basepager.subclass.GovAffairsPager;
-import com.project.wei.zhbj.basepager.subclass.HomePager;
-import com.project.wei.zhbj.basepager.subclass.NewsCenterPager;
-import com.project.wei.zhbj.basepager.subclass.SettingPager;
-import com.project.wei.zhbj.basepager.subclass.SmartServicePager;
+import com.project.wei.zhbj.basepager.subclass.basepager.GovAffairsPager;
+import com.project.wei.zhbj.basepager.subclass.basepager.HomePager;
+import com.project.wei.zhbj.basepager.subclass.basepager.NewsCenterPager;
+import com.project.wei.zhbj.basepager.subclass.basepager.SettingPager;
+import com.project.wei.zhbj.basepager.subclass.basepager.SmartServicePager;
 import com.project.wei.zhbj.view.NoScrollViewPager;
 
 import java.util.ArrayList;
@@ -39,7 +39,7 @@ public class ContentFragment extends BaseFragment {
 
     @Override
     public void initData() {
-        mPagers = new ArrayList<BasePager>();
+        mPagers = new ArrayList<>();
         //添加五个标签页
         mPagers.add(new HomePager(mActivity));
         mPagers.add(new NewsCenterPager(mActivity));
@@ -52,47 +52,6 @@ public class ContentFragment extends BaseFragment {
         radioGruopListener();
 //      设置在某些页面侧边栏不能滑出来
         pagerChangeListener();
-    }
-
-    private void pagerChangeListener() {
-        vp_content.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-            }
-            @Override
-            public void onPageSelected(int position) {
-                BasePager pager = mPagers.get(position);
-                pager.initData();//在这里初始化数据
-
-                if (position == 0 || position == mPagers.size() - 1) {
-                    //首页和设置页面要禁用侧边栏
-                    setSlidingMenuEnable(false);
-                } else {
-                    //其他页面开启侧边栏
-                    setSlidingMenuEnable(true);
-                }
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
-            }
-        });
-        // 手动加载第一页数据，因为第一个页面是默认选中的，所以第一个页面不会加载数据
-        mPagers.get(0).initData();
-        //同时，第一个页面要禁用侧边栏
-        setSlidingMenuEnable(false);
-    }
-//  设置侧边栏是否能打开
-    private void setSlidingMenuEnable(boolean enable) {
-        //获取侧边栏对象
-        MainActivity mainActivity = (MainActivity) mActivity;
-        SlidingMenu slidingMenu = mainActivity.getSlidingMenu();
-        if (enable) {
-            slidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
-        } else {
-            slidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_NONE);
-        }
     }
 
     private void radioGruopListener() {
@@ -118,6 +77,48 @@ public class ContentFragment extends BaseFragment {
                 }
             }
         });
+    }
+    private void pagerChangeListener() {
+        vp_content.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+            }
+            @Override
+            public void onPageSelected(int position) {
+                ///////////////////////////////////////////////////////////////////////////////////
+                BasePager pager = mPagers.get(position);
+                pager.initData();//在这里初始化数据
+
+                if (position == 0 || position == mPagers.size() - 1) {
+                    //首页和设置页面要禁用侧边栏
+                    setSlidingMenuEnable(false);
+                } else {
+                    //其他页面开启侧边栏
+                    setSlidingMenuEnable(true);
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+        // 手动加载第一页数据，因为第一个页面是默认选中的，所以第一个页面不会加载数据
+        mPagers.get(0).initData();
+        //同时，第一个页面要禁用侧边栏
+        setSlidingMenuEnable(false);
+    }
+
+//  设置侧边栏是否能打开
+    private void setSlidingMenuEnable(boolean enable) {
+        //获取侧边栏对象
+        MainActivity mainActivity = (MainActivity) mActivity;
+        SlidingMenu slidingMenu = mainActivity.getSlidingMenu();
+        if (enable) {
+            slidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
+        } else {
+            slidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_NONE);
+        }
     }
 
 

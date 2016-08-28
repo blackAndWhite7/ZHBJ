@@ -12,7 +12,7 @@ import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.project.wei.zhbj.R;
 import com.project.wei.zhbj.activity.MainActivity;
-import com.project.wei.zhbj.basepager.subclass.NewsCenterPager;
+import com.project.wei.zhbj.basepager.subclass.basepager.NewsCenterPager;
 import com.project.wei.zhbj.domain.NewsMenu;
 
 import java.util.ArrayList;
@@ -62,6 +62,12 @@ public class LeftMenuFragment extends BaseFragment {
             }
         });
     }
+    private void toggle() {
+        MainActivity mainActivity = (MainActivity) mActivity;
+        SlidingMenu slidingMenu = mainActivity.getSlidingMenu();
+        slidingMenu.toggle();// 如果当前状态是开, 调用后就关; 反之亦然
+    }
+
 //  设置当前菜单详情页
     protected void setCurrentDetailPager(int position) {
         // 获取新闻中心的对象
@@ -72,12 +78,6 @@ public class LeftMenuFragment extends BaseFragment {
         NewsCenterPager newsCenterPager = fragment.getNewsCenterPager();
         // 修改新闻中心的FrameLayout的布局
         newsCenterPager.setCurrentDetailPager(position);
-    }
-
-    private void toggle() {
-        MainActivity mainActivity = (MainActivity) mActivity;
-        SlidingMenu slidingMenu = mainActivity.getSlidingMenu();
-        slidingMenu.toggle();// 如果当前状态是开, 调用后就关; 反之亦然
     }
 
     class LeftMenuAdapter extends BaseAdapter {
@@ -106,6 +106,7 @@ public class LeftMenuFragment extends BaseFragment {
             //等同于下面这个
             //NewsMenu.NewsMenuData newsMenuData = mNewsMenuData.get(position);
             tv_menu.setText(newsMenuData.title);
+            //////////////////////////////////////////////////////////////////////////////////////////
             if (mCurrentPos == position) {
                 // <item android:state_enabled="true" android:color="#F00"/>
                 //在文字的状态选择器中 enabled表示的是可用的时候，如果不作处理，每一个menu都是可用的，即都是红色
@@ -118,4 +119,5 @@ public class LeftMenuFragment extends BaseFragment {
             return view;
         }
     }
+
 }

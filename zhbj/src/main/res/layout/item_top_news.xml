@@ -4,6 +4,7 @@
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="wrap_content">
+    <!--必须加最外层的LinearLayout布局，高度必须包裹内容，这样加在listview的头布局才可以正常显示FrameLayout的指定高度-->
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="250dp">

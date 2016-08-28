@@ -1,4 +1,4 @@
-package com.project.wei.zhbj.basepager.subclass;
+package com.project.wei.zhbj.basepager.subclass.basepager;
 
 import android.app.Activity;
 import android.text.TextUtils;
@@ -14,10 +14,10 @@ import com.lidroid.xutils.http.client.HttpRequest;
 import com.project.wei.zhbj.activity.MainActivity;
 import com.project.wei.zhbj.basepager.BaseMenuDetailPager;
 import com.project.wei.zhbj.basepager.BasePager;
-import com.project.wei.zhbj.basepager.subclass.menu.InteractMenuDetailPager;
-import com.project.wei.zhbj.basepager.subclass.menu.NewsMenuDetailPager;
-import com.project.wei.zhbj.basepager.subclass.menu.PhotosMenuDetailPager;
-import com.project.wei.zhbj.basepager.subclass.menu.TopicMenuDetailPager;
+import com.project.wei.zhbj.basepager.subclass.basemenudetailpager.InteractMenuDetailPager;
+import com.project.wei.zhbj.basepager.subclass.basemenudetailpager.NewsMenuDetailPager;
+import com.project.wei.zhbj.basepager.subclass.basemenudetailpager.PhotosMenuDetailPager;
+import com.project.wei.zhbj.basepager.subclass.basemenudetailpager.TopicMenuDetailPager;
 import com.project.wei.zhbj.domain.NewsMenu;
 import com.project.wei.zhbj.fragment.LeftMenuFragment;
 import com.project.wei.zhbj.global.GlobalConstants;
@@ -91,7 +91,8 @@ public class NewsCenterPager extends BasePager{
         Gson gson = new Gson();
         //把解析出来的数据存放到了NewsMenu类中
         mNewsData = gson.fromJson(result, NewsMenu.class);
-        // 获取侧边栏对象
+
+        // 获取侧边栏对象,把侧边栏需要的数据传递给它
         MainActivity mainActivity = (MainActivity) mActivity;
         LeftMenuFragment leftMenuFragment = mainActivity.getLeftMenuFragment();
         //给侧边栏设置数据

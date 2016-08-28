@@ -21,6 +21,9 @@ public class TopNewsViewPager extends ViewPager{
         super(context);
     }
 
+
+
+    /*解决头条新闻的viewpager在滑动时，被父控件viewpager拦截，*/
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
         //请求所有的父控件以及祖宗控件 不要拦截事件,就是它自己处理这个事件

@@ -1,4 +1,4 @@
-package com.project.wei.zhbj.basepager.subclass.menu;
+package com.project.wei.zhbj.basepager.subclass.basemenudetailpager;
 
 import android.app.Activity;
 import android.support.v4.view.PagerAdapter;
@@ -20,9 +20,13 @@ import java.util.ArrayList;
 
 /**
  * 菜单详情页-新闻
- *
- * @author Kevin
- * @date 2015-10-18
+ * ViewPagerIndicator使用流程:
+ * 1.引入库
+ * 2.从例子程序中拷贝布局文件
+ * 3.从例子程序中拷贝相关代码(指示器和viewpager绑定; 重写getPageTitle返回标题)
+ * 4.在清单文件中增加样式（MainActivity）
+ * 5.背景修改为白色
+ * 6.修改样式-背景样式&文字样式
  */
 public class NewsMenuDetailPager extends BaseMenuDetailPager {
 
@@ -57,6 +61,10 @@ public class NewsMenuDetailPager extends BaseMenuDetailPager {
         }
         mViewPager.setAdapter(new NewsMenuDetailAdapter());//填充mViewPager,即添加mPagers.size()个页面
 
+
+        /*这里还有一个问题，当往右滑动指示器时，会滑出侧边栏，这是因为外层的viewpager把内层viewpager拦截掉了
+        * 所以你要告诉指示器所在的这个viewpager的父控件以及祖宗控件不要拦截它的事件，要去ViewPagerIndicatorLibrary
+        * 中的TabPageIndicator类中去重写dispatchTouchEvent方法，让它自己处理自己的事件*/
         mIndicator.setViewPager(mViewPager);//将viewpager和指示器绑定在一起.注意:必须在viewpager设置完数据之后再绑定
         // 设置页面滑动监听
         // mViewPager.setOnPageChangeListener();

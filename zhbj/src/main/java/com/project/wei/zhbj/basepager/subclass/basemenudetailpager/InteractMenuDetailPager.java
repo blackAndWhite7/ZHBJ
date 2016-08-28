@@ -1,4 +1,4 @@
-package com.project.wei.zhbj.basepager.subclass.menu;
+package com.project.wei.zhbj.basepager.subclass.basemenudetailpager;
 
 import android.app.Activity;
 import android.graphics.Color;
