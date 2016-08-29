@@ -3,7 +3,9 @@ package com.project.wei.zhbj.activity;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.DisplayMetrics;
 import android.view.Window;
+import android.view.WindowManager;
 
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 import com.jeremyfeinstein.slidingmenu.lib.app.SlidingFragmentActivity;
@@ -11,6 +13,25 @@ import com.project.wei.zhbj.R;
 import com.project.wei.zhbj.fragment.ContentFragment;
 import com.project.wei.zhbj.fragment.LeftMenuFragment;
 
+/* 屏幕适配
+> 养成良好的开发习惯: 多用dp,sp,不用px; 多用线性布局和相对布局, 不用绝对布局;
+  代码中如果必须设置像素的话, 将dp转为px进行设置
+> 项目开发后期,对适配问题进行验证
+- 图片适配
+	hdpi: 480*800  1.5
+	xhdpi: 1280*720  2
+	xxhdpi: 1920*1080  3
+	设备密度:
+	常规做法: 做一套图 1280*720 切图, 放在hdpi或xhdpi下. 如果某个屏幕出了问题, 再针对该屏幕, 对相关出问题的图片进行替换.
+- 布局适配(不太常用)
+	layout-800x480:专门针对480*800屏幕适配的布局文件, 一般只调整位置和大小, 不建议对控件类型和个数进行调整
+- 尺寸适配(很常用)
+	//dp 和 px
+	//values-1280x720/dimens.xml
+- 权重适配
+	 android:weightSum="3"
+- 代码适配
+*/
 public class MainActivity extends SlidingFragmentActivity {
     private static final String TAG_LEFTMENU = "TAG_LEFTMENU";
     private static final String TAG_CONTENT = "TAG_CONTENT";
@@ -34,7 +55,15 @@ public class MainActivity extends SlidingFragmentActivity {
         // 设置模式,左右都有侧边栏
         slidingMenu.setMode(SlidingMenu.LEFT_RIGHT);*/
         slidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);//设置全屏触摸
-        slidingMenu.setBehindOffset(350);//屏幕预留350像素宽度
+        //slidingMenu.setBehindOffset(350);//屏幕预留350像素宽度
+//      屏幕适配
+        WindowManager windowManager = getWindowManager();
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        windowManager.getDefaultDisplay().getMetrics(displayMetrics);
+        int widthPixels = displayMetrics.widthPixels;
+        slidingMenu.setBehindOffset(widthPixels * 2/3);
+
+
         //初始化fragment
         initFragment();
     }

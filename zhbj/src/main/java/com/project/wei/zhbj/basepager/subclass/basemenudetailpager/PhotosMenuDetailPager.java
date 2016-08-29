@@ -12,7 +12,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
-import com.lidroid.xutils.BitmapUtils;
 import com.lidroid.xutils.HttpUtils;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.exception.HttpException;
@@ -25,6 +24,7 @@ import com.project.wei.zhbj.basepager.BaseMenuDetailPager;
 import com.project.wei.zhbj.domain.PhotosBean;
 import com.project.wei.zhbj.global.GlobalConstants;
 import com.project.wei.zhbj.utils.CacheUtil;
+import com.project.wei.zhbj.utils.MyBitmapUtils;
 
 import java.util.ArrayList;
 
@@ -41,7 +41,7 @@ public class PhotosMenuDetailPager extends BaseMenuDetailPager implements View.O
 	private GridView gv_photos;
 	private String result;
 	private ArrayList<PhotosBean.DataDetails> photosNews;
-	public  BitmapUtils bitmapUtils;
+	public  MyBitmapUtils bitmapUtils;
 	private ImageButton ibtn_change;
 
 	public PhotosMenuDetailPager(Activity activity, ImageButton ibtn_change) {
@@ -110,10 +110,9 @@ public class PhotosMenuDetailPager extends BaseMenuDetailPager implements View.O
 	}
 
 	class PhotosAdapter extends BaseAdapter {
-
+//      使用自定义的MyBitmapUtils来完成下载--设置--缓存--防止内存溢出等功能
 		public PhotosAdapter(){
-			bitmapUtils = new BitmapUtils(mActivity);
-			bitmapUtils.configDefaultLoadingImage(R.drawable.news_pic_default);
+			bitmapUtils = new MyBitmapUtils();
 		}
 		@Override
 		public int getCount() {

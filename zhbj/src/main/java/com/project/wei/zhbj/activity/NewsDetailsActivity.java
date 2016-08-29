@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.util.Log;
 import android.view.View;
 import android.webkit.WebChromeClient;
@@ -79,6 +80,23 @@ public class NewsDetailsActivity extends Activity implements View.OnClickListene
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
                 super.onPageStarted(view, url, favicon);
                 pb_loading.setVisibility(View.VISIBLE);
+
+                // 起这个子线程没什么软用，就是为了有时候网页加载完了，进度条还不隐藏的情况
+                // 这里强制五秒钟后，不管加不加载完，都要隐藏掉，要不看着不爽
+                new Thread(){
+                    @Override
+                    public void run() {
+                        SystemClock.sleep(5000);
+
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                pb_loading.setVisibility(View.INVISIBLE);
+                            }
+                        });
+                    }
+
+                }.start();
             }
 
             @Override  // 网页加载结束

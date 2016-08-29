@@ -24,7 +24,7 @@ public class PullRefreshListView extends ListView implements AbsListView.OnScrol
     public static final int PULL_TO_REFRESH = 1;
     public static final int RELEASE_TO_REFRESH = 2;
     public static final int REFRESHING = 3;
-    public int mCurrentState = PULL_TO_REFRESH;//设置当前默认为刷新状态
+    public int mCurrentState = PULL_TO_REFRESH;//设置当前默认为下拉刷新状态
 
     private int viewHeight;
     private View view;

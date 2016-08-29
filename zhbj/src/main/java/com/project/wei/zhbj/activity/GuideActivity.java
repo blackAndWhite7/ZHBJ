@@ -16,6 +16,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.project.wei.zhbj.R;
+import com.project.wei.zhbj.utils.DensityUtils;
 import com.project.wei.zhbj.utils.SharedPrefUtil;
 
 import java.util.ArrayList;
@@ -80,7 +81,7 @@ public class GuideActivity extends Activity {
                     ViewGroup.LayoutParams.WRAP_CONTENT);
             // 从第二个点开始设置左边距
             if (i > 0) {
-                params.leftMargin = 30;
+                params.leftMargin = DensityUtils.dip2px(20,this);//屏幕适配，dp转px
             }
             grayPoint.setLayoutParams(params);// 设置布局参数
             ll_container.addView(grayPoint);// 给容器添加圆点
