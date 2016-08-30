@@ -12,6 +12,7 @@ import com.jeremyfeinstein.slidingmenu.lib.app.SlidingFragmentActivity;
 import com.project.wei.zhbj.R;
 import com.project.wei.zhbj.fragment.ContentFragment;
 import com.project.wei.zhbj.fragment.LeftMenuFragment;
+import com.umeng.analytics.MobclickAgent;
 
 /* 屏幕适配
 > 养成良好的开发习惯: 多用dp,sp,不用px; 多用线性布局和相对布局, 不用绝对布局;
@@ -92,6 +93,16 @@ public class MainActivity extends SlidingFragmentActivity {
         // 根据标记找到对应的fragment
         ContentFragment ContentFragment = (ContentFragment) fragmentManager.findFragmentByTag(TAG_CONTENT);
         return ContentFragment;
+    }
+
+    public void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this);
+    }
+
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
     }
 
 }

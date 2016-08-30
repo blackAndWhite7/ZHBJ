@@ -13,6 +13,7 @@ import android.widget.RelativeLayout;
 
 import com.project.wei.zhbj.R;
 import com.project.wei.zhbj.utils.SharedPrefUtil;
+import com.umeng.analytics.MobclickAgent;
 
 public class SplashActivity extends Activity {
 
@@ -76,9 +77,15 @@ public class SplashActivity extends Activity {
 
             }
         });
+    }
 
+    public void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this);
+    }
 
-
-
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
     }
 }

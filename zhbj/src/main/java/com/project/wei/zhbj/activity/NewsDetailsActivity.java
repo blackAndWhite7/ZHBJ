@@ -20,6 +20,7 @@ import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.project.wei.zhbj.R;
 import com.project.wei.zhbj.utils.SharedPrefUtil;
+import com.umeng.analytics.MobclickAgent;
 
 import cn.sharesdk.framework.ShareSDK;
 import cn.sharesdk.onekeyshare.OnekeyShare;
@@ -198,5 +199,15 @@ public class NewsDetailsActivity extends Activity implements View.OnClickListene
 
         // 启动分享GUI
         oks.show(this);
+    }
+
+    public void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this);
+    }
+
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
     }
 }
