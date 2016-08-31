@@ -69,7 +69,6 @@ public class TabDetailPager extends BaseMenuDetailPager {
     public TabDetailPager(Activity activity, NewsMenu.NewsTabData newsTabData) {
         super(activity);
         mTabData = newsTabData;
-
         mUrl = GlobalConstants.SERVER_URL + mTabData.url;//每个页面具体内容的url
     }
 
@@ -126,8 +125,8 @@ public class TabDetailPager extends BaseMenuDetailPager {
                 int headerViewsCount = lv_news.getHeaderViewsCount();// 获取头布局数量
                 position = position - headerViewsCount;// 需要减去头布局的占位
                 NewsContent.NewsData data = listNews.get(position);
-                String readIds = SharedPrefUtil.getString(mActivity, "read_ids", "");
 
+                String readIds = SharedPrefUtil.getString(mActivity, "read_ids", "");
                 if (!readIds.contains(data.id + "")) { // 只有不包含当前id,才追加,避免重复添加同一个id
                     readIds = readIds + data.id + ",";
                     SharedPrefUtil.setString(mActivity,"read_ids",readIds);
@@ -263,7 +262,6 @@ public class TabDetailPager extends BaseMenuDetailPager {
             }
 
             // 实现头条新闻的自动轮播
-
             if (handler == null) {
                 handler = new Handler(){
                     @Override
@@ -353,7 +351,7 @@ public class TabDetailPager extends BaseMenuDetailPager {
 
     class ListNewsAdapter extends BaseAdapter {
 
-        private final BitmapUtils bitmapUtils;
+        private  BitmapUtils bitmapUtils;
 
         public ListNewsAdapter() {
             bitmapUtils = new BitmapUtils(mActivity);
@@ -396,16 +394,13 @@ public class TabDetailPager extends BaseMenuDetailPager {
             String readIds = SharedPrefUtil.getString(mActivity, "read_ids", "");
             if (readIds.contains(data.id + "")) {
                 holder.textViewTitle.setTextColor(Color.GRAY);
-            } else {      //  这里一定要判断 else 的情况，因为这里有item的复用，不写else时，会被复用，导致显示错误
+            } else { //  这里一定要判断 else 的情况，因为这里有item的复用，不写else时，会被复用，导致显示错误
                 holder.textViewTitle.setTextColor(Color.BLACK);
             }
-
             bitmapUtils.display(holder.imageViewIcon,data.listimage);
-
             return convertView;
         }
     }
-
     static class ViewHolder {
         public ImageView imageViewIcon;
         public TextView textViewTitle;

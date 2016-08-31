@@ -99,7 +99,6 @@ public class PullRefreshListView extends ListView implements AbsListView.OnScrol
                 if (mListener != null) {
                     mListener.onLoadMore();
                 }
-
             }
         }
 
@@ -160,9 +159,7 @@ public class PullRefreshListView extends ListView implements AbsListView.OnScrol
                     if (mListener != null) {
                         mListener.onRefresh();
                     }
-
                     /*onRefresh方法，你的朋友就是通过它来问你要不要买，手机参数信息放在这里*/
-
 
                     // 完整展示头布局
                     view.setPadding(0,0,0,0);
@@ -172,12 +169,13 @@ public class PullRefreshListView extends ListView implements AbsListView.OnScrol
         return super.onTouchEvent(ev);
     }
 
-    //出失火箭头动画
+    //初始化箭头动画
     public void initAnim() {
         animUP = new RotateAnimation(0,-180, Animation.RELATIVE_TO_SELF,0.5f,
                 Animation.RELATIVE_TO_SELF,0.5f);
         animUP.setDuration(300);
         animUP.setFillAfter(true);
+
         animDOWN = new RotateAnimation(-180,0, Animation.RELATIVE_TO_SELF,0.5f,
                 Animation.RELATIVE_TO_SELF,0.5f);
         animDOWN.setDuration(300);
@@ -201,7 +199,7 @@ public class PullRefreshListView extends ListView implements AbsListView.OnScrol
                 break;
             case REFRESHING:
                 tv_state.setText("正在刷新...");
-                iv_arrow.clearAnimation();//先清除箭头动画，否则无法隐藏
+                iv_arrow.clearAnimation();//先清除箭头动画，否则无法隐藏箭头
                 iv_arrow.setVisibility(View.INVISIBLE);
                 pb_loading.setVisibility(View.VISIBLE);
                 break;
@@ -211,7 +209,7 @@ public class PullRefreshListView extends ListView implements AbsListView.OnScrol
     // 3. 定义成员变量，接收监听对象
     private OnRefreshListener mListener;
 
-    //  1. 设置下拉刷新的回调接口
+    //  1. 设置下拉刷新和上拉加载更多的回调接口
     public interface OnRefreshListener{
          void onRefresh();
          void onLoadMore();
@@ -221,7 +219,6 @@ public class PullRefreshListView extends ListView implements AbsListView.OnScrol
     public void setOnRefreshListener(OnRefreshListener listener) {
         mListener = listener;
     }
-
 
 
     // 刷新结束，收起头部控件 view ,并回复默认的 PULL_TO_REFRESH 状态

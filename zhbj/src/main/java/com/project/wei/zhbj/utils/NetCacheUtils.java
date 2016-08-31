@@ -24,17 +24,18 @@ public class NetCacheUtils {
     }
 
 
-    public void getBitmapFromNet(final ImageView imageView, String url) {
+    public void getBitmapFromNet( ImageView imageView, String url) {
         // 下面这条语句要在这里，放在doInBackground里面会有点错误，但不影响运行
         imageView.setTag(url);// 打标记, 将当前imageview和url绑定在了一起
 
         // AsyncTask 异步封装的工具, 可以实现异步请求及主界面更新(对线程池+handler的封装)
         new BitmapTask().execute(imageView,url);// 启动AsyncTask
+                            // 这里的参数，传递给doInBackground的参数列表
     }
    /*   三个泛型意义:
    第一个泛型: doInBackground里的参数类型
    第二个泛型: onProgressUpdate里的参数类型
-   第三个泛型: onPostExecute里的参数类型及doInBackground的返回类型*/
+   第三个泛型: doInBackground的返回类型及onPostExecute里的参数类型*/
     class BitmapTask extends AsyncTask<Object,Integer,Bitmap>{
 
         public ImageView imageView;
@@ -83,10 +84,9 @@ public class NetCacheUtils {
                     // 写内存缓存
                     mMemoryCacheUtils.setMemoryCache(url, result);
                 }
-
             }
-            super.onPostExecute(result);
         }
+
     }
     // 下载图片
     public Bitmap download(String url) {

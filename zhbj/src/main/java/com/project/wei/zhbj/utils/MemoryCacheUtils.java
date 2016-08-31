@@ -4,7 +4,6 @@ import android.graphics.Bitmap;
 import android.support.v4.util.LruCache;
 import android.util.Log;
 
-
 /**
  * Created by wei on 2016/8/29 0029.
  */

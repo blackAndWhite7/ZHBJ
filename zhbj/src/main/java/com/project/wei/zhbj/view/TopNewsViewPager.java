@@ -51,7 +51,6 @@ public class TopNewsViewPager extends ViewPager{
                             //第一个页面，需要拦截，父控件进行处理
                             getParent().requestDisallowInterceptTouchEvent(false);
                         }
-
                     } else {
                         //向左滑
       //////////////////////////////////////////////下面这条语句做个标记////////////////////////
@@ -61,15 +60,12 @@ public class TopNewsViewPager extends ViewPager{
                             getParent().requestDisallowInterceptTouchEvent(false);
                         }
                     }
-
                 } else {
                     //上下滑动，需要拦截，父控件进行处理
                     getParent().requestDisallowInterceptTouchEvent(false);
                 }
                 break;
         }
-
-
         return super.dispatchTouchEvent(ev);
     }
 }

@@ -72,7 +72,7 @@ public class NewsDetailsActivity extends Activity implements View.OnClickListene
         settings.setBuiltInZoomControls(true);// 显示缩放按钮（wap网页不支持，因为wap已经适配好了手机）
         settings.setUseWideViewPort(true);// 支持双击缩放（wap 网页不支持）
 
-
+//      每次进入点击新闻后，先查看以前存过的TextSize ,进行回显
         chooseWhich = SharedPrefUtil.getInt(getApplicationContext(), "TextSize", 2);
         settings.setTextZoom(textSize[chooseWhich]);
 
@@ -160,7 +160,6 @@ public class NewsDetailsActivity extends Activity implements View.OnClickListene
         builder.setPositiveButton("confirm", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {  //这里的 which 是默认值，不会改变，所以不用它
-
                 settings.setTextZoom(textSize[chooseWhich]);
                 SharedPrefUtil.setInt(getApplicationContext(),"TextSize",chooseWhich);
             }
